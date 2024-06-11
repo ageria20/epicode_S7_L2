@@ -3,6 +3,7 @@ const form = document.querySelector("form");
 const rowName = document.querySelector(".row");
 const delButton = document.getElementById("delete");
 let inputArr = [];
+let seconds = 0;
 
 class InputEvent {
   constructor(name) {
@@ -11,14 +12,12 @@ class InputEvent {
 }
 
 const timer = () => {
-  setTimeout(() => {
-    const timerP = document.getElementById("timer");
-    const date = new Date();
-    let seconds = date.getSeconnds();
-    sessionStorage.setItem("seconds", seconds);
-    sessionStorage.getItem("seconds", seconds);
-    timerP.innerText = JSON.parse(seconds);
-  }, 1000);
+  const timerP = document.getElementById("timer");
+
+  sessionStorage.getItem("seconds", seconds);
+
+  timerP.innerText = `${seconds} seconds`;
+  seconds++;
 };
 
 const deleteName = () => {
@@ -56,6 +55,7 @@ form.onsubmit = function (e) {
 };
 
 window.addEventListener("DOMContentLoaded", () => {
+  setInterval(timer, 1000);
   const savedNames = localStorage.getItem("input-memory");
   if (savedNames) {
     const parsedNames = JSON.parse(savedNames);
