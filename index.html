@@ -13,15 +13,20 @@
   </head>
   <body>
     <h1>Esercizi Local Storage</h1>
+
     <form>
       <div class="form-floating mb-3 w-25">
         <input type="text" class="form-control" id="inputName" required />
         <label for="floatingInput">Name</label>
       </div>
-      <button type="submit" class="btn btn-info">Salva</button>
-      <button type="button" id="delete" class="btn btn-info">Cancella</button>
+      <div>
+        <button type="submit" class="btn btn-info mb-3">Salva</button>
+        <button type="button" id="delete" class="btn mb-3 btn-info">Cancella</button>
+      </div>
     </form>
-    <div class="row"></div>
+    <div class="container">
+      <div class="row"></div>
+    </div>
 
     <script src="./jsonStorage.js"></script>
     <script

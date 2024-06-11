@@ -1,7 +1,9 @@
 const inputName = document.querySelector("#inputName");
 const form = document.querySelector("form");
 const rowName = document.querySelector(".row");
-const delButton = document.getElementById("delButton");
+const delButton = document.getElementById("delete");
+let inputArr = [];
+const counter = 0;
 
 class InputEvent {
   constructor(name) {
@@ -9,7 +11,15 @@ class InputEvent {
   }
 }
 
-let inputArr = [];
+const timer = setTimeout(() => {
+  counter++;
+}, 1000);
+
+const deleteName = () => {
+  inputArr.pop();
+  const lastChild = rowName.lastChild;
+  rowName.removeChild(lastChild);
+};
 
 const displayName = (obj) => {
   const col = document.createElement("div");
@@ -18,20 +28,25 @@ const displayName = (obj) => {
   const p = document.createElement("p");
   p.innerText = `${obj.eventName}`;
   col.appendChild(p);
+  delButton.onclick = () => {
+    deleteName();
+  };
 };
 
-const makeAlert = () => {};
-
-const deleteName = (e) => {
-  const col = e.currentTarget;
+const makeAlert = () => {
+  const container = document.querySelector(".container");
+  const alert = document.createElement("div");
+  alert.classList.add("alert alert-info");
+  alert, (innerText = "Inserisci un nome");
+  container.appendChild(alert);
 };
 
 form.onsubmit = function (e) {
   e.preventDefault();
-  const inputEvent = inputName.value;
+  const inputEvent = new InputEvent(inputName.value);
   inputArr.push(inputEvent);
   localStorage.setItem("input-memory", JSON.stringify(inputArr));
-  displayName(new InputEvent(inputEvent));
+  displayName(inputEvent);
 };
 
 window.addEventListener("DOMContentLoaded", () => {
@@ -42,4 +57,7 @@ window.addEventListener("DOMContentLoaded", () => {
   } else {
     makeAlert();
   }
+
+  const timerP = document.getElementById("timer");
+  timerP.innerText = timer();
 });
