@@ -3,7 +3,7 @@ const form = document.querySelector("form");
 const rowName = document.querySelector(".row");
 const delButton = document.getElementById("delete");
 let inputArr = [];
-let seconds = 0;
+let seconds = sessionStorage.getItem("secCount");
 
 class InputEvent {
   constructor(name) {
@@ -15,10 +15,9 @@ const timer = () => {
   const timerP = document.getElementById("timer");
   timerP.classList.add("fs-6");
   timerP.classList.add("text-danger");
-  sessionStorage.getItem("seconds", seconds);
-
-  timerP.innerText = `${seconds} seconds`;
   seconds++;
+  timerP.innerText = `${seconds} seconds`;
+  sessionStorage.setItem("secCount", seconds);
 };
 
 const deleteName = () => {
@@ -29,7 +28,7 @@ const deleteName = () => {
 
 const displayName = (obj) => {
   const col = document.createElement("div");
-  col.classList.add("col");
+  col.classList.add("col-12");
   rowName.appendChild(col);
   const ul = document.createElement("ul");
   const li = document.createElement("li");
@@ -38,6 +37,7 @@ const displayName = (obj) => {
   ul.appendChild(li);
   li.innerText = `${obj.eventName}`;
   col.appendChild(ul);
+
   delButton.onclick = () => {
     deleteName();
   };
