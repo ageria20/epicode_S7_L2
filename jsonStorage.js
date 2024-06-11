@@ -13,7 +13,8 @@ class InputEvent {
 
 const timer = () => {
   const timerP = document.getElementById("timer");
-
+  timerP.classList.add("fs-6");
+  timerP.classList.add("text-danger");
   sessionStorage.getItem("seconds", seconds);
 
   timerP.innerText = `${seconds} seconds`;
@@ -30,9 +31,13 @@ const displayName = (obj) => {
   const col = document.createElement("div");
   col.classList.add("col");
   rowName.appendChild(col);
-  const p = document.createElement("p");
-  p.innerText = `${obj.eventName}`;
-  col.appendChild(p);
+  const ul = document.createElement("ul");
+  const li = document.createElement("li");
+  ul.classList.add("list-group");
+  li.classList.add("list-group-item");
+  ul.appendChild(li);
+  li.innerText = `${obj.eventName}`;
+  col.appendChild(ul);
   delButton.onclick = () => {
     deleteName();
   };
